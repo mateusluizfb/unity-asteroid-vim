@@ -52,7 +52,7 @@ public class PlayerBaseController : MonoBehaviour
         if (rb == null) return;
 
         float currentSpeed = isBoosting ? speed * boostMultiplier : speed;
-        
+
         // Move forward/backward
         Vector2 movement = transform.up * moveDirection.y * currentSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + movement);
