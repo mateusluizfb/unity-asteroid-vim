@@ -26,8 +26,6 @@ public class CameraZoomInZoomOut : MonoBehaviour
     void Update()
     {
         var keyboard = Keyboard.current;
-        if (keyboard == null)
-            return;
 
         // Toggle zoom with Z key
         if (keyboard.zKey.wasPressedThisFrame)
@@ -35,17 +33,11 @@ public class CameraZoomInZoomOut : MonoBehaviour
             if (targetZoom == DefaultZoom)
             {
                 targetZoom = MapZoom; // Zoom out to see whole map
-                
-                // Center camera on map origin when zooming out
-                if (mainCamera != null)
-                {
-                    mainCamera.transform.position = new Vector3(0, 0, mainCamera.transform.position.z);
-                }
+                mainCamera.transform.position = new Vector3(0, 0, mainCamera.transform.position.z);
             }
             else
             {
-                targetZoom = DefaultZoom; // Zoom back in
-                // Camera will resume following player automatically
+                targetZoom = DefaultZoom;
             }
         }
 
@@ -53,11 +45,7 @@ public class CameraZoomInZoomOut : MonoBehaviour
         if (Mathf.Abs(currentZoom - targetZoom) > 0.01f)
         {
             currentZoom = Mathf.Lerp(currentZoom, targetZoom, ZoomSpeed * Time.deltaTime);
-            
-            if (mainCamera != null)
-            {
-                mainCamera.orthographicSize = currentZoom;
-            }
+            mainCamera.orthographicSize = currentZoom;
         }
     }
 }

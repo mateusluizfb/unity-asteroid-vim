@@ -17,6 +17,8 @@ public class OrbitateBehavior : MonoBehaviour
     {
         if (target != null)
         {
+            Debug.DrawLine(transform.position, target.position, Color.green);
+
             transform.RotateAround(target.position, Vector3.forward, 20 * Time.deltaTime);
         }
     }

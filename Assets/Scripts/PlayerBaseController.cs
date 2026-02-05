@@ -7,16 +7,31 @@ public class PlayerBaseController : MonoBehaviour
     public float rotationSpeed = 150f;
     public float boostMultiplier = 2f;
     private Vector2 moveDirection = Vector2.zero;
-    private bool isBoosting = false;
 
     public ParticleSystem boostParticles;
     private Rigidbody2D rb;
+    private Animator animator;
+
+    private bool isBoosting = false;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+            Debug.LogError("PlayerBaseController requires a Rigidbody2D component!");
+
+        if (boostParticles != null)
+            boostParticles.Stop();
+
+        animator = GetComponent<Animator>();
+    }
 
     public void Move(InputAction.CallbackContext context)
     {
         Vector2 inputValue = context.ReadValue<Vector2>();
-        
+
         // Undo normalization to allow for discrete input values
+        // TODO: Adjust this to be set by default in unity later
         moveDirection.x = inputValue.x == 0 ? 0 : Mathf.Sign(inputValue.x);
         moveDirection.y = inputValue.y == 0 ? 0 : Mathf.Sign(inputValue.y);
     }
@@ -37,16 +52,6 @@ public class PlayerBaseController : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        if (rb == null)
-            Debug.LogError("PlayerBaseController requires a Rigidbody2D component!");
-
-        if (boostParticles != null)
-            boostParticles.Stop();
-    }
-
     void FixedUpdate()
     {
         if (rb == null) return;
@@ -60,5 +65,15 @@ public class PlayerBaseController : MonoBehaviour
         // Rotate
         float rotation = -moveDirection.x * rotationSpeed * Time.fixedDeltaTime;
         rb.MoveRotation(rb.rotation + rotation);
+
+        if (moveDirection.x < 0)
+            animator.SetBool("isTurningLeft", true);
+        else if (moveDirection.x > 0)
+            animator.SetBool("isTurningRight", true);
+        else
+        {
+            animator.SetBool("isTurningLeft", false);
+            animator.SetBool("isTurningRight", false);
+        }
     }
 }
