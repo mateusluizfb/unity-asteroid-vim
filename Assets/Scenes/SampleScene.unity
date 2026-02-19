@@ -5775,6 +5775,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyVayneBehavior
   currentState: 0
   target: {fileID: 0}
+  attackWaitTime: 2
+  rollDistance: 3
+  rollSpeed: 5
+  followSpeed: 3
+  detectionRange: 4
 --- !u!58 &1083423448
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7257,7 +7262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotateCenter
   rotationSpeed: 30
-  enableRotation: 0
+  enableRotation: 1
 --- !u!1 &1968890563
 GameObject:
   m_ObjectHideFlags: 0
