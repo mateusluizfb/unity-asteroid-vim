@@ -44,6 +44,8 @@ public class EnemyVayneBehavior : MonoBehaviour
             case EnemyVayneState.StartRoll: StartRoll(); break;
             case EnemyVayneState.FollowTarget: FollowTarget(); break;
         }
+
+        transform.rotation = FaceTargetService.GetSmoothRotation(transform, target.transform);
     }
 
     void OnTriggerEnter2D(Collider2D collision)

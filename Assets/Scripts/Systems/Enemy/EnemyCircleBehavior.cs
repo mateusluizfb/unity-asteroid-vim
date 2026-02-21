@@ -40,6 +40,8 @@ public class EnemyCircleBehavior : MonoBehaviour
             case EnemyCircleState.AttackTarget: AttackTarget(); break;
             case EnemyCircleState.FollowTarget: FollowTarget(); break;
         }
+
+        transform.rotation = FaceTargetService.GetSmoothRotation(transform, target.transform);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
