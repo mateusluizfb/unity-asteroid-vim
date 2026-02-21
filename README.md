@@ -17,4 +17,8 @@
 
 - Other
     - Vim like commands to interact with the world and the spaceship abilities
-    
+
+
+This project uses:
+- https://buzpin.itch.io/2d-spaceships-bundle
+- https://ansimuz.itch.io/spaceship-shooter-environment
